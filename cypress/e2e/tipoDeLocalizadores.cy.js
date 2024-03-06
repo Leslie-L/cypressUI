@@ -24,5 +24,31 @@ describe ('Tipos de localizadores', ()=>{
     it('Obtener por medio de una clase', ()=>{
         cy.get('.mr-sm-2.form-control')
     })
+    /*
+        Con contains podemos en alto nivel hacer:
+        - .contains(content) Búsqueda por contenido
+        - .contains(selector, content) Búsqueda por selectores
+            
+    */
+	it('Usando contains', () => {
+		cy.contains('Reading')
+		cy.contains('.header-wrapper', 'Widgets')
+	})
 
+	it('Usando parent', () => {
+		// Obten el elemento Padre
+		cy.get('input[placeholder="First Name"]').parent()
+		//Obetner los elementos Padres en general
+		cy.get('input[placeholder="First Name"]').parents()
+		// Obten el elemento Padre y el elemento Hijo
+		cy.get('input[placeholder="First Name"]').parents().find('label')
+
+		// Obteniendo el elemento padre y el elemento hijo limitando el padre
+		cy.get('input[placeholder="First Name"]').parents('form').find('label')
+
+		cy.get('form').find('label')
+		//uso incorrrecto de find
+
+		//cy.find('label')
+	})
 } )
