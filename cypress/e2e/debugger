@@ -1,0 +1,16 @@
+Aquí hay algunas técnicas comunes para debuggear pruebas en Cypress:
+
+Uso de comandos cy.log(): Puedes insertar comandos cy.log() en tu código para registrar mensajes en la consola de Cypress durante la ejecución de la prueba. Esto te permite verificar valores de variables, estados de elementos y más.
+cy.log('Mensaje de depuración');
+Uso de cy.pause(): Este comando pausará la ejecución de la prueba y te permitirá inspeccionar manualmente el estado de la aplicación y las variables en ese momento. Puedes reanudar la prueba cuando estés listo.
+cy.pause();
+Uso de cy.debug(): Similar a cy.pause(), este comando permite pausar la ejecución de la prueba y abrir una consola interactiva de DevTools para inspeccionar la aplicación y ejecutar comandos de Cypress directamente en la consola DevTools.
+cy.debug();
+Grabación de videos y capturas de pantalla: Cypress puede grabar videos de la ejecución de la prueba y capturar capturas de pantalla en caso de errores. Esto te permite revisar la ejecución paso a paso y entender mejor lo que sucedió durante la prueba.
+
+Uso de cy.get() con selectores precisos: Asegúrate de usar selectores CSS o selectores personalizados precisos para ubicar elementos en la página. Puedes usar la función .should() para verificar el estado de un elemento después de su selección.
+
+cy.get('.mi-elemento').should('have.class', 'activo');
+Revisión de la consola del navegador: Además de las herramientas de Cypress, también debes revisar la consola del navegador (DevTools) en busca de errores de JavaScript, advertencias y mensajes de registro que puedan ayudarte a identificar problemas en tu aplicación web.
+
+Uso de comandos cy.wait(): A veces, es necesario agregar comandos cy.wait() para asegurarse de que ciertas acciones o eventos se completen antes de continuar con la prueba.
