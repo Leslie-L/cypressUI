@@ -4,8 +4,12 @@
   "description": "\"# cypressUI\"",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
-  },
+    "test": "cypress open",
+    "test:ui": "cypress open", 
+    "test:headless": "cypress run", 
+    "test:headless:chrome": "cypress run --browser chrome", 
+    "test:headless:chrome:spec": "cypress run --browser chrome --spec ./cypress/e2e/primerPrueba.cy.js" 
+    }, 
   "keywords": [],
   "author": "",
   "license": "ISC",
