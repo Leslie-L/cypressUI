@@ -53,7 +53,7 @@ describe('Interactuando con los elementos', () => {
 		})
 	})
 
-	it.only('Inputs type text', () => {
+	it('Inputs type text', () => {
 		cy.visit('/automation-practice-form')
 		cy.get('#firstName').type('Javier')
 		cy.get('#lastName').type('Fuentes')
@@ -66,5 +66,50 @@ describe('Interactuando con los elementos', () => {
 		cy.get('#firstName').clear()
 		//Mocernos al otro input
 		cy.get('#firstName').type('Otro nombre{enter}')
+	})
+	it.only('Checkboxes y radio botnones ', () => {
+		cy.visit('/automation-practice-form')
+		// a veces fallara porque lo cubre otro elemento
+		// cy.get('#gender-radio-1').click()
+		// se puede hacer asi pero no es recomendado porque no esta cumpliendo el comportamiento que tuviera el usuario
+		// cy.get('#gender-radio-1').click({ force: true })
+		// cy.get('#gender-radio-1').check({ force: true })
+		// Acercamiento recomendado si usamos el label
+		cy.get("label[for='gender-radio-1']").click()
+
+		// Checkbox , lo mismo si usamos el input directo
+		// cy.get('#hobbies-checkbox-1').check({ force: true })
+		// cy.get('#hobbies-checkbox-1').uncheck({ force: true })
+		// cy.get('#hobbies-checkbox-1').click({ force: true })
+		// Acercamiento recomendado con label
+		cy.get("label[for='hobbies-checkbox-1']").click()
+		// desmarcar
+		// cy.get("label[for='hobbies-checkbox-1']").click()
+	})
+	//Es importante tener el function y no solo un arrow function ay que las arrow function carecen de contexto y por ende del this
+	it('Extrayendo informacion', function () {
+		cy.visit('/automation-practice-form')
+		// a veces fallara porque lo cubre otro elemento
+
+		cy.get('#firstName').as('nombre')
+		cy.get('@nombre').type('Javier')
+		// Primera manera de hacerlo
+		cy.get('@nombre').then(($nombre) => {
+			texto = $nombre.val()
+			expect(texto).to.equal('Javier')
+		})
+
+		// Segunda manera de hacerlo, invoke solo invoca una funcion que en este caso el elemento que nos regresa el get , como jquery tiene
+		cy.get('@nombre').invoke('val').should('equal', 'Javier')
+		cy.get('@nombre').invoke('val').as('nombreGlobal')
+	})
+
+	//Es importante tener el function y no solo un arrow function ya que las arrow function carecen de contexto y por ende del this
+	it('pasando informacion entre its', function () {
+		// Con la variable global
+		cy.get('#lastName').type(texto)
+
+		//CCon el alias
+		cy.get('#lastName').type(this.nombreGlobal)
 	})
 })
