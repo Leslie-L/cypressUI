@@ -195,4 +195,13 @@ describe('Interactuando con los elementos', () => {
 				cy.wrap($el).should('contain', 'Maria Anders')
 			})
 	})
+	it.only('Interactuando con data picker', () => {
+		cy.visit('https://material.angular.io/components/datepicker/overview')
+		cy.get('datepicker-overview-example')
+			.find('input')
+			.eq(0)
+			.type('12/02/2005{enter}')
+
+		cy.get('datepicker-overview-example').find('svg').click()
+	})
 })
