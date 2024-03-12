@@ -248,5 +248,13 @@ describe('Interactuando con los elementos', () => {
         cy.contains('You hovered over the Button').should('not.exist')
 
     })
+	
+    it.only('Interactuando con drag and drops', () => {
+        cy.visit('/dragabble')
+        cy.get('#dragBox')
+            .trigger('mousedown', {which: 1, pageX: 600, pageY: 100})
+            .trigger('mousemove', {which: 1, pageX: 600, pageY: 600})
+            .trigger('mouseup')
+    })
 
 })
